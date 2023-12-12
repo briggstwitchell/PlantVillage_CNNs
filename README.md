@@ -121,7 +121,7 @@ Below is set complete set of the classes for all the images within the dataset:
 The development of precision farming tools can help give low-income farmers a cost-effective means to improve their crop yields. A major component of these tools will be plant and plant disease recognition software, implemented with computer vision techniques such as convolutional neural networks.
 
 ## Methods
-I implemented six different neural networks, ranging from a simple deep neural network with two hidden layers to pre-trained convolusional neural networks (CNNs) drawing upon complex CNN architectures.
+I implemented six different neural networks, ranging from a simple deep neural network with two hidden layers to pre-trained convolutional neural networks (CNNs) drawing upon complex CNN architectures.
 
 ## Findings
 Below are accuracy, recall, and precision scores for the models implemented:
@@ -146,15 +146,15 @@ Below shows the training history for each model implemented (in order from best 
 #### Traditional CNN, no pre-training:
 <img src="models/history/cnn_1_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-#### Simple neural network CNN:
+#### Simple neural network (no convolutional layers):
 <img src="models/history/nn_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-## Convolusions and CNN architectures:
+## Convolutions and CNN architectures:
 A convolutional layer within a neural network acts as a channel to filter out specific aspects from data, often images.
 
 Convolution functions scan a 'window' over the input data and output a filtered version, which becomes a single channel within a set of channels that compose a convolutional layer. Each layer attempts to capture something different about the input it received.
 
-Various sequences of convolusional layers determine that CNN's architecture:
+Various sequences of convolutional layers determine that CNN's architecture:
 
 <img src="models/architecture_imgs/plane_cnn_2.png" alt="habitat-loss" width="600"/>
 
