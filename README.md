@@ -10,7 +10,7 @@
 ## Background
 Agricultural productivity is important. It correlates with a reduction in poverty (likely a contributing factor):
 
-<img src="imgs/cereal-yield-vs-extreme-poverty-scatter.png" alt="cereal-yield-vs-extreme-poverty-scatter" width="600"/>
+<img src="imgs/cereal-yield-vs-extreme-poverty-scatter.png" alt="cereal-yield-vs-extreme-poverty-scatter" width="800"/>
 
 source: https://ourworldindata.org/grapher/cereal-yield-vs-extreme-poverty-scatter
 
