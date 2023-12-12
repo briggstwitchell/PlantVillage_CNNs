@@ -17,43 +17,40 @@ source: https://ourworldindata.org/grapher/cereal-yield-vs-extreme-poverty-scatt
 
 And it promotes biodiversity by reducing the land dedicated to agriculture:
 
-<img src="imgs/cereal-land-spared.png" alt="cereal-land-spared" width="600"/>
+<img src="imgs/cereal-land-spared.png" alt="cereal-land-spared" width="800"/>
 
 source:https://ourworldindata.org/yields-vs-land-use-how-has-the-world-produced-enough-food-for-a-growing-population
 
 Agricultural productivity has improved, but mostly in rich nations:
 
-<img src="imgs/global-food.png" alt="global-food" width="600"/>
+<img src="imgs/global-food.png" alt="global-food" width="800"/>
 
 source: https://ourworldindata.org/africa-yields-problem
 
 Africa has struggled to keep pace with the rest of the world's gains in crop yields. Its increase in total agricultural output since 1980 is primarily attributable to increased land use, not increased productivity:
 
-<img src="imgs/Cereal-yields-vs.-land-use-–-Marimekko.png" alt="Cereal-yields-vs.-land-use" width="600"/>
+<img src="imgs/Cereal-yields-vs.-land-use-–-Marimekko.png" alt="Cereal-yields-vs.-land-use" width="800"/>
 
 source: https://ourworldindata.org/africa-yields-problem
 
----
 
 This is an issue, because Africa is projected to experience almost all of the world's population growth in the next century (from ~1 to ~4 billion):
 
-<img src="imgs/population-regions-with-projections.png" alt="population-regions-with-projections" width="600"/>
+<img src="imgs/population-regions-with-projections.png" alt="population-regions-with-projections" width="800"/>
 
 source: https://ourworldindata.org/region-population-2100
 
----
 
 This threatens Africa's wealth of biodiversity:
 
-<img src="imgs/habitat-loss.png" alt="habitat-loss" width="600"/>
+<img src="imgs/habitat-loss.png" alt="habitat-loss" width="800"/>
 
 source: https://ourworldindata.org/yields-habitat-loss
 
----
 
 Therefore, Our World In Data has characterized it as one of the most important problems this century
 
-<img src="imgs/owd-headline-africa-yields.png" alt="owd-headline-africa-yields" width="600"/>
+<img src="imgs/owd-headline-africa-yields.png" alt="owd-headline-africa-yields" width="800"/>
 
 Article: https://ourworldindata.org/africa-yields-problem
 
