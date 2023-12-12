@@ -14,3 +14,6 @@
   biburl    = {https://dblp.org/rec/bib/journals/corr/HughesS15},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
+
+Keras reference:
+https://keras.io/guides/transfer_learning/#an-endtoend-example-finetuning-an-image-classification-model-on-a-cats-vs-dogs-dataset
