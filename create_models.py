@@ -61,16 +61,16 @@ input_shape = (256,256,3)
 num_classes = 38
 
 # SCALE DATA TO BE BETWEEN 0 AND 1
-# rescale_layer = tf.keras.layers.Rescaling(scale=1.0 / 255.0)
+rescale_layer = tf.keras.layers.Rescaling(scale=1.0 / 255.0)
 
-# ds_train_scaled = ds_train.map(lambda x, y: (rescale_layer(x), y))
-# ds_validation_scaled = ds_validation.map(lambda x, y: (rescale_layer(x), y))
-# ds_test_scaled = ds_test.map(lambda x, y: (rescale_layer(x), y))
+ds_train_scaled = ds_train.map(lambda x, y: (rescale_layer(x), y))
+ds_validation_scaled = ds_validation.map(lambda x, y: (rescale_layer(x), y))
+ds_test_scaled = ds_test.map(lambda x, y: (rescale_layer(x), y))
 
 # Check that scaling worked
-# for batch in ds_train_scaled:
-#     assert 0<= batch[0][0][0][0][0] and batch[0][0][0][0][0] <=1
-#     break
+for batch in ds_train_scaled:
+    assert 0<= batch[0][0][0][0][0] and batch[0][0][0][0][0] <=1
+    break
 
 ####################
 # INSTANTIATE MODELS
