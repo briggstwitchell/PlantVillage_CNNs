@@ -69,7 +69,7 @@ Hughes and Salathé find: "Currently, infectious diseases reduce the potential y
 Importantly, Hughes and Salathé note "[t]he widespread distribution of smartphones among crop growers around the world... offers the potential of turning the smartphone into a valuable tool for diverse communities growing food." This hypothesis led to the development of the PlantVillage, a crowdsourced dataset containing a host of crop leaves with (or without) a labeled disease. 
 
 ## Dataset
-Below is a sample of the [PantVillage](https://data.mendeley.com/datasets/tywbtsjrjv/1) dataset, with each number corresponding to a leaf, disease combination:
+Below is a sample of the [PlantVillage](https://data.mendeley.com/datasets/tywbtsjrjv/1) dataset, with each number corresponding to a leaf, disease combination:
 
 <img src="imgs/leaves_sample.png" alt="owd-headline-africa-yields" width="600"/>
 
