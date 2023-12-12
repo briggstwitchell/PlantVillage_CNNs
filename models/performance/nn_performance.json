@@ -1,0 +1,8 @@
+{
+    "model_name": "nn",
+    "training_time": 26.05827498435974,
+    "loss": 3.63691782951355,
+    "accuracy": 0.028568176552653313,
+    "recall": 0.0,
+    "precision": 0.0
+}
