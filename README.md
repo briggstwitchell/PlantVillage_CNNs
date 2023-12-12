@@ -182,7 +182,10 @@ The Xception CNN architecture is an extension of the Inception architecture repl
 ## My motivations for this project
 This project was a means for me to combine several of my interest. My interest in agriculture is connected to my larger interest in helping reduce global poverty. Additionally, I wanted to become more familiar with CNNs and understand their applications. 
 
-## Additional notes
-Due to issues in obtaining the original dataset, the dataset used here already had some augmentation done to it.
+## Constraints/Issues
+Due to issues in obtaining the original dataset, the dataset used here already had some augmentation applied to it, such as removing background noise (as is shown in the sample images above). This likely contributes positively to the performance of the models.
 
-Additionally, the directory structure used referenced in the code is slightly altered from the directory structure of the dataset from its original source.
+I'll also note that I wasted a lot of time attempting to set up a TensorFlow environment on the Khoury Discovery cluster. A conda environment isn't recommended for TensorFlow, and user access privileges on the cluster are restricted. Anyone that has a reliable pipeline for running TensorFlow on the cluster, please let me know. 
+
+## Additional notes
+The directory structure used referenced in the code is slightly altered from the directory structure of the dataset from its original source.
