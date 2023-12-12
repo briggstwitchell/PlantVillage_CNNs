@@ -73,7 +73,7 @@ Below is a sample of the [PlantVillage](https://data.mendeley.com/datasets/tywbt
 
 <img src="imgs/leaves_sample.png" alt="owd-headline-africa-yields" width="600"/>
 
-Note that the dataset also includes pictures of healthy leaves for all of the categories.
+Note that the dataset also includes pictures of healthy leaves for all of the categories. The raw dataset contains 61,486 images, but has six different augmentation techniques applied to it to increase its size. The techniques are image flipping, Gamma correction, noise injection, PCA color augmentation, rotation, and Scaling.
 
 Below is set complete set of the classes for all the images within the dataset:
 
