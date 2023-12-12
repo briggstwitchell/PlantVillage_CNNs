@@ -1,4 +1,4 @@
-# Convolutional Neural Networks for Diagnosing Plant Disease
+# Applying Convolutional Neural Networks to Plant Disease Diagnosis
 
 ---
 **Student Name**: Briggs Twitchell  
