@@ -4,27 +4,21 @@ import time
 import json
 from contextlib import redirect_stdout
 from io import StringIO
+from functools import partial
 
 import tensorflow as tf
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.applications.inception_v3 import InceptionV3
-from tensorflow.keras.models import Model
-
-physical_devices = tf.config.list_physical_devices('GPU')
-tf.config.experiemental.set_memory_growth(physical_devices[0], True)
-tf.random.set_seed(42)
 
 # FOLDER SETUP
+# NOTE the folder structure of the original dataset obtained from 
 DATASET_PORTION = 'full'
 base_dir = f"{os.getcwd()}/dataset/{DATASET_PORTION}"
 train_dir = f"{base_dir}/train_and_validation/train"
 valid_dir = f"{base_dir}/train_and_validation/validation"
-test_dir = f"{base_dir}/test"
 
+tf.random.set_seed(42)
 image_size=(256, 256)
-batch_size = 64
+batch_size = 32
 
 ds_train = tf.keras.preprocessing.image_dataset_from_directory(
     train_dir,
@@ -63,47 +57,108 @@ ds_test = tf.keras.preprocessing.image_dataset_from_directory(
     seed=42,
 )
 
-# INSTANTIATE MODELS
 input_shape = (256,256,3)
 num_classes = 38
 
-# standard neural network
+# SCALE DATA TO BE BETWEEN 0 AND 1
+# rescale_layer = tf.keras.layers.Rescaling(scale=1.0 / 255.0)
+
+# ds_train_scaled = ds_train.map(lambda x, y: (rescale_layer(x), y))
+# ds_validation_scaled = ds_validation.map(lambda x, y: (rescale_layer(x), y))
+# ds_test_scaled = ds_test.map(lambda x, y: (rescale_layer(x), y))
+
+# Check that scaling worked
+# for batch in ds_train_scaled:
+#     assert 0<= batch[0][0][0][0][0] and batch[0][0][0][0][0] <=1
+#     break
+
+####################
+# INSTANTIATE MODELS
+####################
+# STANDARD NEURAL NETWORK
 plane_nn = keras.Sequential(
     [
-        layers.Flatten(input_shape=input_shape),
-        layers.Dense(64, activation='relu'),
-        layers.Dense(64, activation='relu'),
-        layers.Dense(num_classes, activation='softmax'),
+        tf.keras.layers.Flatten(input_shape=input_shape),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(num_classes, activation='softmax'),
     ]
 )
 
-# standard convolutional neural network
-plane_cnn = keras.Sequential(
+# STANDARD CNN
+plane_cnn_1 = keras.Sequential(
     [
         keras.Input(shape=input_shape),
-        layers.Conv2D(32, 3, padding='valid', activation='relu'),
-        layers.MaxPooling2D(pool_size=(2,2)),
-        layers.Conv2D(64, 3, activation='relu'),
-        layers.MaxPooling2D(),
-        layers.Conv2D(128, 3, activation='relu'),
-        layers.Flatten(),
-        layers.Dense(64, activation='relu'),
-        layers.Dense(num_classes, activation='softmax'),
+        tf.keras.layers.Conv2D(32, 3, padding='valid', activation='relu'),
+        tf.keras.layers.MaxPooling2D(pool_size=(2,2)),
+        tf.keras.layers.Conv2D(64, 3, activation='relu'),
+        tf.keras.layers.MaxPooling2D(),
+        tf.keras.layers.Conv2D(128, 3, activation='relu'),
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(num_classes, activation='softmax'),
     ]
 )
 
-# CNN with tuning (extension of googLeNet)
-base_model = InceptionV3(weights='imagenet', include_top=False)
+DefaultConv2D = partial(tf.keras.layers.Conv2D, kernel_size=3, padding="same",
+                        activation="relu", kernel_initializer="he_normal")
+plane_cnn_2 = tf.keras.Sequential([
+    DefaultConv2D(filters=64, kernel_size=7, input_shape=input_shape),
+    tf.keras.layers.MaxPool2D(),
+    DefaultConv2D(filters=128),
+    DefaultConv2D(filters=128),
+    tf.keras.layers.MaxPool2D(),
+    DefaultConv2D(filters=256),
+    DefaultConv2D(filters=256),
+    tf.keras.layers.MaxPool2D(),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(units=128, activation="relu",
+                          kernel_initializer="he_normal"),
+    tf.keras.layers.Dropout(0.5),
+    tf.keras.layers.Dense(units=64, activation="relu",
+                          kernel_initializer="he_normal"),
+    tf.keras.layers.Dropout(0.5),
+    tf.keras.layers.Dense(units=num_classes, activation="softmax")
+])
 
+# INCEPTIONV3
+base_model_1 = tf.keras.applications.inception_v3.InceptionV3(weights='imagenet', include_top=False)
 # add compatibility with 38 class output layer
-x = base_model.output
-x = layers.GlobalAveragePooling2D()(x)
-x = layers.Dense(1024, activation='relu')(x)
-predictions = layers.Dense(38, activation='softmax')(x)
-inception_v3 = Model(inputs=base_model.input, outputs=predictions)
+x = base_model_1.output
+x = tf.keras.layers.GlobalAveragePooling2D()(x)
+x = tf.keras.layers.Dense(1024, activation='relu')(x)
+predictions = tf.keras.layers.Dense(num_classes, activation='softmax')(x)
+inception_v3 = tf.keras.models.Model(inputs=base_model_1.input, outputs=predictions)
+
+# XCEPTION WITH TUNING
+base_model_2 = tf.keras.applications.xception.Xception(weights="imagenet", include_top=False)
+avg = tf.keras.layers.GlobalAveragePooling2D()(base_model_2.output)
+output = tf.keras.layers.Dense(num_classes, activation="softmax")(avg)
+xception = tf.keras.Model(inputs=base_model_2.input, outputs=output)
+
+# freezing the pretrained weights
+for layer in base_model_2.layers:
+    layer.trainable = False
+
+# unfreezing some of the top layers
+for layer in base_model_2.layers[56:]:
+    layer.trainable = True
+
+# EFFICIENTNET WITH TUNING
+base_model_3 = tf.keras.applications.efficientnet.EfficientNetB1(weights="imagenet", include_top=False)
+avg = tf.keras.layers.GlobalAveragePooling2D()(base_model_3.output)
+output = tf.keras.layers.Dense(num_classes, activation="softmax")(avg)
+efficientnet = tf.keras.Model(inputs=base_model_3.input, outputs=output)
+
+# freezing the pretrained weights
+for layer in base_model_3.layers:
+    layer.trainable = False
+
+# unfreezing some of the top layers
+for layer in base_model_3.layers[56:]:
+    layer.trainable = True
 
 metrics = ['accuracy',
-        #    tf.keras.metrics.F1Score(),
            tf.keras.metrics.Recall(),
            tf.keras.metrics.Precision()]
 
@@ -114,9 +169,15 @@ plane_nn.compile(
     metrics=metrics,
 )
 
-plane_cnn.compile(
+plane_cnn_1.compile(
     loss=keras.losses.CategoricalCrossentropy(),
-    optimizer=keras.optimizers.Adam(learning_rate=0.001),
+    optimizer=keras.optimizers.legacy.Adam(learning_rate=0.001),
+    metrics=metrics,
+)
+
+plane_cnn_2.compile(
+    loss=keras.losses.CategoricalCrossentropy(),
+    optimizer=keras.optimizers.legacy.Adam(learning_rate=0.001),
     metrics=metrics,
 )
 
@@ -126,6 +187,16 @@ inception_v3.compile(
     metrics=metrics,
 )
 
+xception.compile(
+    loss="categorical_crossentropy",
+    optimizer=tf.keras.optimizers.legacy.SGD(learning_rate=0.1, momentum=0.9),
+    metrics=metrics)
+
+efficientnet.compile(
+    loss="categorical_crossentropy",
+    optimizer=tf.keras.optimizers.legacy.SGD(learning_rate=0.1, momentum=0.9),
+    metrics=metrics)
+
 # SETTING 
 fit_params = {
     'steps_per_epoch': 100,
@@ -133,7 +204,9 @@ fit_params = {
     'verbose': 2
 }
 
-error_checking = True
+# allow for faster module runtime to ensure it can run
+# (i.e. ignore model performance when error checking is True)
+error_checking = False
 if error_checking:
     fit_params = {
     'steps_per_epoch': 10,
@@ -141,21 +214,13 @@ if error_checking:
     'verbose': 2
 }
 
-def format_time(seconds):
-    """Convert seconds to Hours:Minutes:Seconds format."""
-    hours = seconds // 3600
-    minutes = (seconds % 3600) // 60
-    seconds = seconds % 60
-    return f"{int(hours)}h:{int(minutes)}m:{seconds:.2f}s"
-
-
 def train_and_evaluate_model(model, train_generator, validation_generator, fit_params, model_name):
     """Fit and obtain test score for the models"""
     # Train the model
     start_time = time.time()
-    model.fit(train_generator, validation_data=validation_generator, **fit_params)
+    history = model.fit(train_generator, validation_data=validation_generator, **fit_params)
     end_time = time.time()
-    formatted_total_time = format_time(end_time - start_time)
+    formatted_total_time = end_time - start_time
 
     # Evaluate the model
     eval_results = model.evaluate(ds_test)
@@ -183,18 +248,33 @@ def train_and_evaluate_model(model, train_generator, validation_generator, fit_p
     with open(f"./models/performance/{model_name}_performance.json", "w") as file:
         json.dump(performance_data, file, indent=4)
 
-    model.save(f'./models/saved/{model_name}')
-    return performance_data
+    model.save(f'./models/saved/{model_name}.keras')
+    return performance_data, history
 
 models = {
-    "plane_nn": plane_nn,
-    "plane_cnn": plane_cnn,
-    "inception_v3": inception_v3,
+    # "nn": plane_nn,
+    "cnn_1_2": plane_cnn_1,
+    "cnn_2_2": plane_cnn_2,
+    # "inception_v3": inception_v3,
+    # "xception": xception,
+    # "efficientnet": efficientnet,
 }
 
 performances = []
+model_histories = []
 
 for model_name, model in models.items():
-    performances.append(
-        train_and_evaluate_model(model, ds_train, ds_validation, fit_params, model_name)
-        )
+    performance, history = train_and_evaluate_model(model, ds_train, ds_validation, fit_params, model_name)
+    performances.append(performance)
+    model_histories.append(history)
+
+import matplotlib.pyplot as plt
+import pandas as pd
+for model_name, history in zip(models.keys(),model_histories):
+    df = pd.DataFrame(history.history) #TODO possible set
+    df.index += 1
+    df.plot(
+        figsize=(8,5), xlim=[1,10], ylim=[0,1.5], grid=True, xlabel='Epoch',
+        style=['r--','r--','b-','b-*'])
+    plt.savefig(f"./models/history/{model_name}_history_plot.jpg")
+    
