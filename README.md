@@ -64,7 +64,7 @@ I am specifically interested in means by which precision farming techniques can 
 
 According to a [study](./articles/finger-et-al-2019-precision-farming-at-the-nexus-of-agricultural-production-and-the-environment.pdf) by Annual Review of Resource Economics, "[t]echnological developments related to the digitalization of the agricultural sector are currently complemented by advances in data processing and robotics." Thus, there is an opportunity to apply the availability of data and computing power to improve crop yields.
 
-Hughes and Salathé find: "Currently, infectious diseases reduce the potential yield by an average of 40% with many farmers in the developing world experiencing yield losses as high as 100%." Plant disease and yield reliability are closely linked to climate factors, so climate will likely only exacerbate this issue.
+Hughes and Salathé find: **"Currently, infectious diseases reduce the potential yield by an average of 40% with many farmers in the developing world experiencing yield losses as high as 100%."** Plant disease and yield reliability are closely linked to climate factors, so climate will likely only exacerbate this issue.
 
 Importantly, Hughes and Salathé note "[t]he widespread distribution of smartphones among crop growers around the world... offers the potential of turning the smartphone into a valuable tool for diverse communities growing food." This hypothesis led to the development of the PlantVillage, a crowdsourced dataset containing a host of crop leaves with (or without) a labeled disease. 
 
