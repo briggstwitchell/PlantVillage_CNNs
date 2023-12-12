@@ -80,45 +80,45 @@ Note that the dataset also includes pictures of healthy leaves for all of the ca
 
 Below is set complete set of the classes for all the images within the dataset:
 
-1.Apple_scab
-2.Apple_black_rot
-3.Apple_cedar_apple_rust
-4.Apple_healthy
-5.Background_without_leaves
-6.Blueberry_healthy
-7.Cherry_powdery_mildew
-8.Cherry_healthy
-9.Corn_gray_leaf_spot
-10.Corn_common_rust
-11.Corn_northern_leaf_blight
-12.Corn_healthy
-13.Grape_black_rot
-14.Grape_black_measles
-15.Grape_leaf_blight
-16.Grape_healthy
-17.Orange_haunglongbing
-18.Peach_bacterial_spot
-19.Peach_healthy
-20.Pepper_bacterial_spot
-21.Pepper_healthy
-22.Potato_early_blight
-23.Potato_healthy
-24.Potato_late_blight
-25.Raspberry_healthy
-26.Soybean_healthy
-27.Squash_powdery_mildew
-28.Strawberry_healthy
-29.Strawberry_leaf_scorch
-30.Tomato_bacterial_spot
-31.Tomato_early_blight
-32.Tomato_healthy
-33.Tomato_late_blight
-34.Tomato_leaf_mold
-35.Tomato_septoria_leaf_spot
-36.Tomato_spider_mites_two-spotted_spider_mite
-37.Tomato_target_spot
-38.Tomato_mosaic_virus
-39.Tomato_yellow_leaf_curl_virus
+1. Apple_scab
+2. Apple_black_rot
+3. Apple_cedar_apple_rust
+4. Apple_healthy
+5. Background_without_leaves
+6. Blueberry_healthy
+7. Cherry_powdery_mildew
+8. Cherry_healthy
+9. Corn_gray_leaf_spot
+10. Corn_common_rust
+11. Corn_northern_leaf_blight
+12. Corn_healthy
+13. Grape_black_rot
+14. Grape_black_measles
+15. Grape_leaf_blight
+16. Grape_healthy
+17. Orange_haunglongbing
+18. Peach_bacterial_spot
+19. Peach_healthy
+20. Pepper_bacterial_spot
+21. Pepper_healthy
+22. Potato_early_blight
+23. Potato_healthy
+24. Potato_late_blight
+25. Raspberry_healthy
+26. Soybean_healthy
+27. Squash_powdery_mildew
+28. Strawberry_healthy
+29. Strawberry_leaf_scorch
+30. Tomato_bacterial_spot
+31. Tomato_early_blight
+32. Tomato_healthy
+33. Tomato_late_blight
+34. Tomato_leaf_mold
+35. Tomato_septoria_leaf_spot
+36. Tomato_spider_mites_two-spotted_spider_mite
+37. Tomato_target_spot
+38. Tomato_mosaic_virus
+39. Tomato_yellow_leaf_curl_virus
 
 ## Thesis
 The development of precision farming tools can help give low-income farmers a cost-effective means to improve their crop yields. A major component of these tools will be plant and plant disease recognition software, implemented with computer vision techniques such as convolutional neural networks.
@@ -137,20 +137,20 @@ The [EfficientNet](/articles/EfficientNet-Rethinking_Model_Scaling_for_Convoluti
 
 Below shows the training history for each model implemented (in order from best to worst performance):
 
-Xception:
-<img src="models/history/xception_history_plot.jpg" alt="habitat-loss" width="800"/>
+#### Xception:
+<img src="models/history/xception_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-EfficientNet:
-<img src="models/history/efficientnet_history_plot.jpg" alt="habitat-loss" width="800"/>
+#### EfficientNet:
+<img src="models/history/efficientnet_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-InceptionV3:
-<img src="models/history/inception_v3_history_plot.jpg" alt="habitat-loss" width="800"/>
+#### InceptionV3:
+<img src="models/history/inception_v3_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-Traditional CNN, no pre-training:
-<img src="models/history/cnn_1_history_plot.jpg" alt="habitat-loss" width="800"/>
+#### Traditional CNN, no pre-training:
+<img src="models/history/cnn_1_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-Simple neural network CNN:
-<img src="models/history/nn_history_plot.jpg" alt="habitat-loss" width="800"/>
+#### Simple neural network CNN:
+<img src="models/history/nn_history_plot.jpg" alt="habitat-loss" width="600"/>
 
 ## Convolusions and CNN architectures:
 A convolutional layer within a neural network acts as a channel to filter out specific aspects from data, often images.
@@ -169,12 +169,15 @@ Often, a traditional neural network is included as a final sequence of layers to
 The Inception CNN architecture includes 'inception modules', which create parallel convolutional layers. These are basically filters that get concatenated together to create the same number of channels as there are filters. Inception modules apply this parallel convolving and then recombined the information with 'depth concatenation'.
 
 This is an inception module:
+
 <img src="models/architecture_imgs/InceptionCNN_1.png" alt="habitat-loss" width="600"/>
 
 And this is a zoomed out picture of the entire Inception architecture:
+
 <img src="models/architecture_imgs/InceptionCNN_2.png" alt="habitat-loss" width="600"/>
 
 ### Xception architecture:
+
 The Xception CNN architecture is an extension of the Inception architecture replaces the inception modules with a 'depthwise separable convolutional layer.' This, in short, applies a spatial filter to each input feature map and then exclusively looks for cross-channel patterns. 
 <img src="models/architecture_imgs/xception_1.png" alt="habitat-loss" width="600"/>
 
