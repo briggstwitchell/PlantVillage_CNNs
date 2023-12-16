@@ -9,6 +9,8 @@ from functools import partial
 import tensorflow as tf
 from tensorflow import keras
 
+################################################################
+
 # FOLDER SETUP
 # NOTE the folder structure of the original dataset obtained from 
 DATASET_PORTION = 'full'
@@ -20,6 +22,7 @@ tf.random.set_seed(42)
 image_size=(256, 256)
 batch_size = 32
 
+# Load data and split into train, validation, and test sets
 ds_train = tf.keras.preprocessing.image_dataset_from_directory(
     train_dir,
     labels='inferred',
@@ -72,9 +75,9 @@ for batch in ds_train_scaled:
     assert 0<= batch[0][0][0][0][0] and batch[0][0][0][0][0] <=1
     break
 
-####################
+################################################################
 # INSTANTIATE MODELS
-####################
+################################################################
 # STANDARD NEURAL NETWORK
 plane_nn = keras.Sequential(
     [
@@ -85,7 +88,7 @@ plane_nn = keras.Sequential(
     ]
 )
 
-# STANDARD CNN
+# STANDARD CNN 1
 plane_cnn_1 = keras.Sequential(
     [
         keras.Input(shape=input_shape),
@@ -100,6 +103,7 @@ plane_cnn_1 = keras.Sequential(
     ]
 )
 
+# STANDARD CNN 2
 DefaultConv2D = partial(tf.keras.layers.Conv2D, kernel_size=3, padding="same",
                         activation="relu", kernel_initializer="he_normal")
 plane_cnn_2 = tf.keras.Sequential([
@@ -162,6 +166,8 @@ metrics = ['accuracy',
            tf.keras.metrics.Recall(),
            tf.keras.metrics.Precision()]
 
+################################################################
+
 # COMPILING MODELS    
 plane_nn.compile(
     loss=keras.losses.CategoricalCrossentropy(),
@@ -197,7 +203,9 @@ efficientnet.compile(
     optimizer=tf.keras.optimizers.legacy.SGD(learning_rate=0.1, momentum=0.9),
     metrics=metrics)
 
-# SETTING 
+################################################################
+
+# Setting up fit parameters
 fit_params = {
     'steps_per_epoch': 100,
     'epochs': 10,
@@ -213,9 +221,23 @@ if error_checking:
     'epochs': 1,
     'verbose': 2
 }
-
+################################################################
 def train_and_evaluate_model(model, train_generator, validation_generator, fit_params, model_name):
-    """Fit and obtain test score for the models"""
+    """
+    Trains and evaluates a given model using the provided data generators and fit parameters.
+    
+    Args:
+        model (keras.Model): The model to be trained and evaluated.
+        train_generator (keras.utils.Sequence): The data generator for training data.
+        validation_generator (keras.utils.Sequence): The data generator for validation data.
+        fit_params (dict): Additional parameters to be passed to the `fit` method of the model.
+        model_name (str): The name of the model.
+    
+    Returns:
+        tuple: A tuple containing the performance data dictionary and the training history.
+    """
+        
+    
     # Train the model
     start_time = time.time()
     history = model.fit(train_generator, validation_data=validation_generator, **fit_params)
@@ -251,6 +273,9 @@ def train_and_evaluate_model(model, train_generator, validation_generator, fit_p
     model.save(f'./models/saved/{model_name}.keras')
     return performance_data, history
 
+################################################################
+
+# associated each model with its name
 models = {
     "nn": plane_nn,
     "cnn_1": plane_cnn_1,
@@ -263,14 +288,18 @@ models = {
 performances = []
 model_histories = []
 
+# obtain performance metrics for each model
 for model_name, model in models.items():
     performance, history = train_and_evaluate_model(model, ds_train, ds_validation, fit_params, model_name)
     performances.append(performance)
     model_histories.append(history)
+################################################################
 
 import matplotlib.pyplot as plt
 import pandas as pd
-for model_name, history in zip(models.keys(),model_histories):
+
+# plot the training history of each model
+for model_name, history in zip(models.keys(),model_histories):   
     df = pd.DataFrame(history.history) #TODO possible set
     df.index += 1
     df.plot(

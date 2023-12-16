@@ -192,5 +192,5 @@ I'll also note that I wasted a lot of time attempting to set up a TensorFlow env
 ## Additional notes
 * The directory structure used referenced in the code is slightly altered from the directory structure of the dataset from its original source.
 * The code is implemented such that the trained models will be saved to the models directory.
-
+* if `error_checking` is set to `True`, the code will run much quicker. This can be used to do a simple pass through the `create_models.py` file to ensure that each model can compile prior to training on the entire dataset.
 
