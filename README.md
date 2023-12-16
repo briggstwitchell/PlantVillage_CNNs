@@ -1,4 +1,4 @@
-# Convolutional Neural Networks for Diagnosing Plant Disease
+# Applying Convolutional Neural Networks to Plant Disease Diagnosis
 
 ---
 **Student Name**: Briggs Twitchell  
@@ -64,7 +64,7 @@ I am specifically interested in means by which precision farming techniques can 
 
 According to a [study](./articles/finger-et-al-2019-precision-farming-at-the-nexus-of-agricultural-production-and-the-environment.pdf) by Annual Review of Resource Economics, "[t]echnological developments related to the digitalization of the agricultural sector are currently complemented by advances in data processing and robotics." Thus, there is an opportunity to apply the availability of data and computing power to improve crop yields.
 
-Hughes and Salathé find: "Currently, infectious diseases reduce the potential yield by an average of 40% with many farmers in the developing world experiencing yield losses as high as 100%." Plant disease and yield reliability are closely linked to climate factors, so climate will likely only exacerbate this issue.
+Hughes and Salathé find: **"Currently, infectious diseases reduce the potential yield by an average of 40% with many farmers in the developing world experiencing yield losses as high as 100%."** Plant disease and yield reliability are closely linked to climate factors, so climate will likely only exacerbate this issue.
 
 Importantly, Hughes and Salathé note "[t]he widespread distribution of smartphones among crop growers around the world... offers the potential of turning the smartphone into a valuable tool for diverse communities growing food." This hypothesis led to the development of the PlantVillage, a crowdsourced dataset containing a host of crop leaves with (or without) a labeled disease. 
 
@@ -73,7 +73,7 @@ Below is a sample of the [PlantVillage](https://data.mendeley.com/datasets/tywbt
 
 <img src="imgs/leaves_sample.png" alt="owd-headline-africa-yields" width="600"/>
 
-Note that the dataset also includes pictures of healthy leaves for all of the categories.
+Note that the dataset also includes pictures of healthy leaves for all of the categories. The raw dataset contains 61,486 images, but has six different augmentation techniques applied to it to increase its size. The techniques are image flipping, Gamma correction, noise injection, PCA color augmentation, rotation, and Scaling.
 
 Below is set complete set of the classes for all the images within the dataset:
 
@@ -121,7 +121,7 @@ Below is set complete set of the classes for all the images within the dataset:
 The development of precision farming tools can help give low-income farmers a cost-effective means to improve their crop yields. A major component of these tools will be plant and plant disease recognition software, implemented with computer vision techniques such as convolutional neural networks.
 
 ## Methods
-I implemented six different neural networks, ranging from a simple deep neural network with two hidden layers to pre-trained convolusional neural networks (CNNs) drawing upon complex CNN architectures.
+I implemented six different neural networks, ranging from a simple deep neural network with two hidden layers to pre-trained convolutional neural networks (CNNs) drawing upon complex CNN architectures.
 
 ## Findings
 Below are accuracy, recall, and precision scores for the models implemented:
@@ -146,15 +146,15 @@ Below shows the training history for each model implemented (in order from best 
 #### Traditional CNN, no pre-training:
 <img src="models/history/cnn_1_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-#### Simple neural network CNN:
+#### Simple neural network (no convolutional layers):
 <img src="models/history/nn_history_plot.jpg" alt="habitat-loss" width="600"/>
 
-## Convolusions and CNN architectures:
+## Convolutions and CNN architectures:
 A convolutional layer within a neural network acts as a channel to filter out specific aspects from data, often images.
 
 Convolution functions scan a 'window' over the input data and output a filtered version, which becomes a single channel within a set of channels that compose a convolutional layer. Each layer attempts to capture something different about the input it received.
 
-Various sequences of convolusional layers determine that CNN's architecture:
+Various sequences of convolutional layers determine that CNN's architecture:
 
 <img src="models/architecture_imgs/plane_cnn_2.png" alt="habitat-loss" width="600"/>
 
@@ -189,5 +189,6 @@ I'll also note that I wasted a lot of time attempting to set up a TensorFlow env
 
 ## Additional notes
 * The directory structure used referenced in the code is slightly altered from the directory structure of the dataset from its original source.
-
 * The code is implemented such that the trained models will be saved to the models directory.
+
+
