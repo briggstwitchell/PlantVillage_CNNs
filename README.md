@@ -43,9 +43,9 @@ source: https://ourworldindata.org/region-population-2100
 
 This threatens Africa's wealth of biodiversity:
 
-<img src="imgs/habitat-loss.png" alt="habitat-loss" width="800"/>
+<img src="imgs/.png" alt="" width="800"/>
 
-source: https://ourworldindata.org/yields-habitat-loss
+source: https://ourworldindata.org/yields-
 
 
 Therefore, Our World In Data has characterized it as one of the most important problems this century
@@ -62,7 +62,7 @@ I am specifically interested in means by which precision farming techniques can 
 
 ## Precision farming 
 
-According to a [study](./articles/finger-et-al-2019-precision-farming-at-the-nexus-of-agricultural-production-and-the-environment.pdf) by Annual Review of Resource Economics, "[t]echnological developments related to the digitalization of the agricultural sector are currently complemented by advances in data processing and robotics." Thus, there is an opportunity to apply the availability of data and computing power to improve crop yields.
+According to a [study](./articles/finger-et-al-2019-precision-farming-at-the-nexus-of-agricultural-production-and-the-environment.pdf) by Annual Review of Resource Economics, "[t]echnological developments related to the digitalization of the agricultural sector are currently complemented by advances in data processing and robotics". Thus, there is an opportunity to apply the availability of data and computing power to improve crop yields.
 
 Hughes and Salathé find: **"Currently, infectious diseases reduce the potential yield by an average of 40% with many farmers in the developing world experiencing yield losses as high as 100%."** Plant disease and yield reliability are closely linked to climate factors, so climate will likely only exacerbate this issue.
 
@@ -126,7 +126,7 @@ I implemented six different neural networks, ranging from a simple deep neural n
 ## Findings
 Below are accuracy, recall, and precision scores for the models implemented:
 
-<img src="models/performance/all_performance_plot.png" alt="habitat-loss" width="800"/>
+<img src="models/performance/all_performance_plot.png" alt="" width="800"/>
 
 There was significant variance between the pre-trained and simple models. The model with the best performance was the [Xception](/articles/Xception-Deep_Learning_with_Depthwise_Separable_Convolutions.pdf) model, which achieved 95.50% accuracy, 95.23% recall, and 95.89% precision. This model took 45 minutes to train on a Mac M1 with 16GB of RAM.
 
@@ -135,19 +135,19 @@ The [EfficientNet](/articles/EfficientNet-Rethinking_Model_Scaling_for_Convoluti
 Below shows the training history for each model implemented (in order from best to worst performance):
 
 #### Xception:
-<img src="models/history/xception_history_plot.jpg" alt="habitat-loss" width="600"/>
+<img src="models/history/xception_history_plot.jpg" alt="" width="600"/>
 
 #### EfficientNet:
-<img src="models/history/efficientnet_history_plot.jpg" alt="habitat-loss" width="600"/>
+<img src="models/history/efficientnet_history_plot.jpg" alt="" width="600"/>
 
 #### InceptionV3:
-<img src="models/history/inception_v3_history_plot.jpg" alt="habitat-loss" width="600"/>
+<img src="models/history/inception_v3_history_plot.jpg" alt="" width="600"/>
 
 #### Traditional CNN, no pre-training:
-<img src="models/history/cnn_1_history_plot.jpg" alt="habitat-loss" width="600"/>
+<img src="models/history/cnn_1_history_plot.jpg" alt="" width="600"/>
 
 #### Simple neural network (no convolutional layers):
-<img src="models/history/nn_history_plot.jpg" alt="habitat-loss" width="600"/>
+<img src="models/history/nn_history_plot.jpg" alt="" width="600"/>
 
 ## Convolutions and CNN architectures:
 A convolutional layer within a neural network acts as a channel to filter out specific aspects from data, often images.
@@ -156,27 +156,27 @@ Convolution functions scan a 'window' over the input data and output a filtered 
 
 Various sequences of convolutional layers determine that CNN's architecture:
 
-<img src="models/architecture_imgs/plane_cnn_2.png" alt="habitat-loss" width="600"/>
+<img src="models/architecture_imgs/plane_cnn_2.png" alt="" width="600"/>
 
 Often, a traditional neural network is included as a final sequence of layers to synthesize the information generated from the convolutional layers:
 
-<img src="models/architecture_imgs/plane_cnn_1.jpeg" alt="habitat-loss" width="600"/>
+<img src="models/architecture_imgs/plane_cnn_1.jpeg" alt="" width="600"/>
 
 ### Inception architecture:
 The Inception CNN architecture includes 'inception modules', which create parallel convolutional layers. These are basically filters that get concatenated together to create the same number of channels as there are filters. Inception modules apply this parallel convolving and then recombined the information with 'depth concatenation'.
 
 This is an inception module:
 
-<img src="models/architecture_imgs/InceptionCNN_1.png" alt="habitat-loss" width="600"/>
+<img src="models/architecture_imgs/InceptionCNN_1.png" alt="" width="600"/>
 
 And this is a zoomed out picture of the entire Inception architecture:
 
-<img src="models/architecture_imgs/InceptionCNN_2.png" alt="habitat-loss" width="600"/>
+<img src="models/architecture_imgs/InceptionCNN_2.png" alt="" width="600"/>
 
 ### Xception architecture:
 
 The Xception CNN architecture is an extension of the Inception architecture replaces the inception modules with a 'depthwise separable convolutional layer.' This, in short, applies a spatial filter to each input feature map and then exclusively looks for cross-channel patterns. 
-<img src="models/architecture_imgs/xception_1.png" alt="habitat-loss" width="600"/>
+<img src="models/architecture_imgs/xception_1.png" alt="" width="600"/>
 
 
 ## My motivations for this project
@@ -193,4 +193,4 @@ I'll also note that I wasted a lot of time attempting to set up a TensorFlow env
 * The directory structure used referenced in the code is slightly altered from the directory structure of the dataset from its original source. See the `dataset_structure.txt` file to see the directory structure modification. Changing the data according to this structure should allow the `create_models.py` script to run without errors.
 * The code is implemented such that the trained models will be saved to the models directory.
 * if `error_checking` is set to `True`, the code will run much quicker. This can be used to do a simple pass through the `create_models.py` file to ensure that each model can compile prior to training on the entire dataset.
-
+* All resources used in the development of this project have been linked to in this README
