@@ -188,4 +188,6 @@ Due to issues in obtaining the original dataset, the dataset used here already h
 I'll also note that I wasted a lot of time attempting to set up a TensorFlow environment on the Khoury Discovery cluster. A conda environment isn't recommended for TensorFlow, and user access privileges on the cluster are restricted. Anyone that has a reliable pipeline for running TensorFlow on the cluster, please let me know. 
 
 ## Additional notes
-The directory structure used referenced in the code is slightly altered from the directory structure of the dataset from its original source.
+* The directory structure used referenced in the code is slightly altered from the directory structure of the dataset from its original source.
+
+* The code is implemented such that the trained models will be saved to the models directory.
