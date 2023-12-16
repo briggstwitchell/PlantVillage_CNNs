@@ -178,7 +178,7 @@ And this is a zoomed out picture of the entire Inception architecture:
 The Xception CNN architecture is an extension of the Inception architecture replaces the inception modules with a 'depthwise separable convolutional layer.' This, in short, applies a spatial filter to each input feature map and then exclusively looks for cross-channel patterns. 
 <img src="models/architecture_imgs/xception_1.png" alt="" width="600"/>
 
-*Note*: Images obtained from the online textbook version of [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 3rd Edition](https://learning.oreilly.com/library/view/hands-on-machine-learning/9781098125967/) by Aurélien Géron.
+*Note*: CNN architecture images obtained from the online textbook version of [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 3rd Edition](https://learning.oreilly.com/library/view/hands-on-machine-learning/9781098125967/) by Aurélien Géron.
 
 ## My motivations for this project
 This project was a means for me to combine several of my interest. My interest in agriculture is connected to my larger interest in helping reduce global poverty. Additionally, I wanted to become more familiar with CNNs and understand their applications.
