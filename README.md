@@ -180,7 +180,9 @@ The Xception CNN architecture is an extension of the Inception architecture repl
 
 
 ## My motivations for this project
-This project was a means for me to combine several of my interest. My interest in agriculture is connected to my larger interest in helping reduce global poverty. Additionally, I wanted to become more familiar with CNNs and understand their applications. 
+This project was a means for me to combine several of my interest. My interest in agriculture is connected to my larger interest in helping reduce global poverty. Additionally, I wanted to become more familiar with CNNs and understand their applications.
+
+Ultimately, my reading on the subject led me to identify one of the most important problems in the space of agriculture and search for technological applications that could help address this issue.
 
 ## Constraints/Issues
 Due to issues in obtaining the original dataset, the dataset used here already had some augmentation applied to it, such as removing background noise (as is shown in the sample images above). This likely contributes positively to the performance of the models.
