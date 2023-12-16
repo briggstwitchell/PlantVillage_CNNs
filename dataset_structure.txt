@@ -1,0 +1,5 @@
+dataset
+└── full
+    └── train_and_validation
+        ├── train
+        └── validation
