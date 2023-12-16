@@ -252,12 +252,12 @@ def train_and_evaluate_model(model, train_generator, validation_generator, fit_p
     return performance_data, history
 
 models = {
-    # "nn": plane_nn,
-    "cnn_1_2": plane_cnn_1,
-    "cnn_2_2": plane_cnn_2,
-    # "inception_v3": inception_v3,
-    # "xception": xception,
-    # "efficientnet": efficientnet,
+    "nn": plane_nn,
+    "cnn_1": plane_cnn_1,
+    "cnn_2": plane_cnn_2,
+    "inception_v3": inception_v3,
+    "xception": xception,
+    "efficientnet": efficientnet,
 }
 
 performances = []
